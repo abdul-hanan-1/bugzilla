@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Bug', new_bug_path %>
+<%= link_to 'New Bug', new_bug_path if current_user.manager?%>

@@ -1,5 +1,6 @@
 class Bug < ApplicationRecord
-	has_and_belongs_to_many :users
+   has_many :bug_users
+   has_many :users , through: :bug_users  
 	belongs_to :project
 	has_one_attached :screenshot
 end

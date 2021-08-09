@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_06_112610) do
+ActiveRecord::Schema.define(version: 2021_08_09_111214) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2021_08_06_112610) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bug_users", force: :cascade do |t|
+    t.integer "bug_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bug_id"], name: "index_bug_users_on_bug_id"
+    t.index ["user_id"], name: "index_bug_users_on_user_id"
+  end
+
   create_table "bugs", force: :cascade do |t|
     t.text "title"
     t.datetime "deadline"
@@ -49,15 +58,6 @@ ActiveRecord::Schema.define(version: 2021_08_06_112610) do
     t.string "kind"
     t.integer "project_id"
     t.index ["project_id"], name: "index_bugs_on_project_id"
-  end
-
-  create_table "bugs_users", force: :cascade do |t|
-    t.integer "bug_id"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["bug_id"], name: "index_bugs_users_on_bug_id"
-    t.index ["user_id"], name: "index_bugs_users_on_user_id"
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -74,15 +74,6 @@ ActiveRecord::Schema.define(version: 2021_08_06_112610) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "manager"
-  end
-
-  create_table "projects_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["project_id"], name: "index_projects_users_on_project_id"
-    t.index ["user_id"], name: "index_projects_users_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

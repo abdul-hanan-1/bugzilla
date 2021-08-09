@@ -3,8 +3,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-   has_and_belongs_to_many :bugs
-   has_and_belongs_to_many :projects      
+   has_many :project_users
+   has_many :projects , through: :project_users   
+   has_many :bug_users
+   has_many :bugs , through: :bug_users      
   def manager?
      user_type=="manager"
   end 
