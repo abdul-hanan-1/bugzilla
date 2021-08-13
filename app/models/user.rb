@@ -15,5 +15,8 @@ class User < ApplicationRecord
   end
   def qa?
      user_type=="qa"
-  end        
+  end  
+  scope :developers, -> { where("user_type "developer") } 
+  scope :qas, -> { where(user_type: "qa") } 
+  scope :not_yet_added, ->(id) { joins(:project_users).where("project_id != :id", id: id) }       
 end

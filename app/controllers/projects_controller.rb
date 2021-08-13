@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy add_user]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -53,17 +53,18 @@ class ProjectsController < ApplicationController
     end
   end
   def add_user
-
+     @developer= User.developers.not_yet_added(@project.id)
+     @qa= User.qas.not_yet_added(@project.id)
     if params[:user_id].present?
       
-      @project.users.create(spell_id: params[:spell_id])
+      @project.project_users.create(user_id: params[:user_id])
       respond_to do |format|
-        format.html { redirect_to books_url, notice: 'Spell was successfully added to book.' }
+        format.html { redirect_to projects_url, notice: 'User was successfully added to book.' }
         format.json { head :no_content }
       end
     end
+  end  
 
-  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
