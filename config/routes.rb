@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   root to: "static#index"
   get 'projects/:id/add_user', to: 'projects#add_user', as: 'add_user'
   post 'projects/:id/add_user', to: 'projects#add_user'
+  post 'projects/:id/remove_user', to: 'projects#remove_user', as: 'remove_user'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

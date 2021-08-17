@@ -1,29 +1,4 @@
-<style>
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
 
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
-  table, td, th {
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th, td {
-    padding: 15px;
-  }
-
-  tr:nth-child(even) {background-color: #f2f2f2;}
-</style>
 <h1 style="text-align: center">Add Developer in <%= @project.title %></h1>
 
 
@@ -46,7 +21,7 @@
         <%= f.hidden_field :user_id , value: developer.id%>
 
       <input type="hidden" name="user_id" value="<%= developer.id %>">
-        <td><%= developer.name %></td>
+        <td><%= developer.name  %><%= developer.id  %></td>
         <td>
           <%= f.submit 'Add to Project'%>
         </td>

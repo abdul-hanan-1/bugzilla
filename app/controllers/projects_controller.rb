@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy add_user]
+  before_action :set_project, only: %i[ show edit update destroy add_user remove_user]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -64,7 +64,17 @@ class ProjectsController < ApplicationController
       end
     end
   end  
+  def remove_user
 
+    projectu = @project.project_users.find_by(user_id: params[:user_id])
+    puts projectu
+    projectu.destroy
+    respond_to do |format|
+      format.html { redirect_to projects_url, notice: 'User was successfully removed from Project.' }
+      format.json { head :no_content }
+    end
+    
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
