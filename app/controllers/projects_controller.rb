@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy add_user remove_user]
+  before_action :set_project, only: %i[ show edit update destroy add_user remove_user add_bug]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
+    @bugs=@project.bugs.with_attached_screenshot
   end
 
   # GET /projects/new
@@ -75,6 +76,28 @@ class ProjectsController < ApplicationController
     end
     
   end
+  def add_bug 
+    
+  end  
+
+  def create_bug
+    if params.has_key?("commit")
+      puts "--------------------------------------"   
+      @project = Project.find(params[:id])  
+      a = @project.bugs.new(bug_params)
+      if a.save 
+      puts "success"
+      else 
+      puts "-"*50, a.errors.full_messages.join(", ")   
+      end
+
+    end
+      
+      respond_to do |format|
+        format.html { redirect_to @project, notice: "Bug was successfully added." }
+        format.json { head :no_content }
+      end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -85,4 +108,8 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :manager)
     end
+    def bug_params
+      params.require(:bug).permit(:title, :deadline, :kind, :screenshot)
+    end
 end
+

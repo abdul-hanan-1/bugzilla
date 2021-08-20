@@ -9,6 +9,7 @@
   <strong>Manager:</strong>
   <%= @project.manager %>
 </p>
+<% if current_user.manager? %>
 <table>
   <thead>
     <tr>
@@ -53,3 +54,36 @@
 </table>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+<% elsif current_user.qa? %>
+<ul>
+  <% @project.users.developers.each do |developer| %>
+  <li><%= developer.name.capitalize %></li>
+ <% end %>
+</ul>
+<% @bugs.each do |bug| %>
+<p>
+  <strong>Title:</strong>
+  <%= bug.title %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= bug.deadline %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= bug.status %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= bug.kind %>
+</p>
+<p>
+  <strong>Screenshot:</strong>
+  <%= image_tag bug.screenshot %>
+</p>
+<% end%>
+<%= link_to 'Add Bug', add_bug_path(@project.id) %>
+<% end%>
