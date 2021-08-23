@@ -20,6 +20,11 @@
     <%= form.file_field :screenshot %>
   </div>
   <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, ['new','assigned','completed'] %>
+  </div>
+
+  <div class="field">
     <%= form.label :deadline %>
     <%= form.datetime_select :deadline %>
   </div>

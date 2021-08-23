@@ -2,6 +2,7 @@
 
   <%= form_with(scope: :bug, url: create_bug_projects_path, method: "post", html: {style: 'text-align: center'}) do |form|%>
   <%= hidden_field :project_id, value: @project.id%>
+  <%= form.hidden_field :status, value: 'new'%>
   <div class="field">
     <%= form.label :title %>
     <%= form.text_area :title %>
@@ -16,8 +17,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.select :type, ['Bug','Feature'] %>
+    <%= form.label :kind %>
+    <%= form.select :kind, ['Bug','Feature'] %>
   </div>
 
   <div class="actions">

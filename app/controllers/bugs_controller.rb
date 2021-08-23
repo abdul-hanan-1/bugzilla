@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :set_bug, only: %i[ show edit update destroy ]
+  before_action :set_bug, only: %i[assign_bug show edit update destroy ]
   before_action :authenticate_user!
   # GET /bugs or /bugs.json
   def index
@@ -47,6 +47,20 @@ class BugsController < ApplicationController
     end
   end
 
+  def assign_bug
+    
+      current_user.bug_users.create(bug_id: params[:bug_id])
+     respond_to do |format|
+       if @bug.update(status: params[:status])
+         format.html { redirect_to @bug, notice: "Bug was successfully updated." }
+         format.json { render :show, status: :ok, location: @bug }
+       else
+         format.html { render :edit, status: :unprocessable_entity }
+         format.json { render json: @bug.errors, status: :unprocessable_entity }
+       end
+     end
+  end
+
   # DELETE /bugs/1 or /bugs/1.json
   def destroy
     @bug.destroy
@@ -64,6 +78,6 @@ class BugsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bug_params
-      params.require(:bug).permit(:title, :deadline, :kind, :screenshot)
+      params.require(:bug).permit(:title, :deadline, :kind, :screenshot,:status)
     end
 end

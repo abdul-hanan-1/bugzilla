@@ -1,0 +1,26 @@
+<% @new_bugs.each do |bug| %>
+<p>
+  <strong>Title:</strong>
+  <%= bug.title %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= bug.deadline %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= bug.status %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= bug.kind %>
+</p>
+ <%= form_with url: "/bugs/#{bug.id}/assign_bug", method: :patch do |f| %>
+
+        <%= f.hidden_field :status, value: 'assigned' %>
+        <p> <%= f.submit 'Assign to yourself'%></p>
+<% end%>
+<% end%>

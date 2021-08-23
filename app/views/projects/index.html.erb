@@ -16,7 +16,7 @@
       <tr>
         <td><%= project.title %></td>
         <td><%= project.manager %></td>
-        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Show', project if current_user.manager?%><%= link_to 'Show',qa_show_path(project) if current_user.qa?%><%= link_to 'Show',developer_show_path(project) if current_user.developer?%></td>
         <td><%= link_to 'Add User', add_user_path(project.id) if current_user.manager?%></td>
         <td><%= link_to 'Edit', edit_project_path(project) if current_user.manager?%></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } if current_user.manager?%></td>

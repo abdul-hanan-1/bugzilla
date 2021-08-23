@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy add_user remove_user add_bug]
+  before_action :set_project, only: %i[ show qa_show developer_show edit update destroy add_user remove_user add_bug]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -8,8 +8,18 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1 or /projects/1.json
+  def qa_show
+    @new_bugs=@project.bugs.new_bugs.with_attached_screenshot
+    @assigned_bugs=@project.bugs.assigned.with_attached_screenshot
+    @completed_bugs=@project.bugs.completed.with_attached_screenshot
+  end
+
   def show
-    @bugs=@project.bugs.with_attached_screenshot
+
+  end  
+
+  def developer_show
+    @new_bugs=@project.bugs.new_bugs.with_attached_screenshot
   end
 
   # GET /projects/new
@@ -20,7 +30,19 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
   end
+  def assign_bug
+    @bug= Bug.find_by(id: params[:bug_id])
+    cuurent_user.bugs.create(bug_params)
+    
+    respond_to do |format|
+   
+      if  @bug.update(bug_params)
+        format.html { redirect_to @project, notice: "Bug was successfully assigned." }
+        format.json { render :show, status: :updated, location: @project }
+      end   
+    end
 
+  end
   # POST /projects or /projects.json
   def create
     @project = current_user.projects.create(project_params)
@@ -94,7 +116,7 @@ class ProjectsController < ApplicationController
     end
       
       respond_to do |format|
-        format.html { redirect_to @project, notice: "Bug was successfully added." }
+        format.html { redirect_to qa_show_url(@project.id), notice: "Bug was successfully added." }
         format.json { head :no_content }
       end
   end
@@ -109,7 +131,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:title, :manager)
     end
     def bug_params
-      params.require(:bug).permit(:title, :deadline, :kind, :screenshot)
+      params.require(:bug).permit(:title, :deadline, :kind, :screenshot, :status)
     end
 end
 
