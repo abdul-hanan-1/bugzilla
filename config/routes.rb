@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :projects
+  resources :projects do
+    collection do
+      get 'bugs_bucket'
+    end
+  end
   resources :bugs
   devise_for :users
   authenticated :user do
@@ -7,6 +11,8 @@ Rails.application.routes.draw do
   end
   root to: "static#index"
   patch 'bugs/:id/assign_bug', to: 'bugs#assign_bug', as: 'assign_bug' 
+  patch 'bugs/:id/mark_completed', to: 'bugs#mark_completed', as: 'mark_completed'
+  get 'projects/test_route', to: 'projects#test_route'
   get 'projects/qa_show/:id', to: 'projects#qa_show', as: 'qa_show'
   get 'projects/developer_show/:id', to: 'projects#developer_show', as: 'developer_show'
   get 'projects/:id/add_user', to: 'projects#add_user', as: 'add_user'

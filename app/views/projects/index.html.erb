@@ -26,5 +26,5 @@
 </table>
 
 <br>
-
+<%= link_to 'My Bugs Bucket', bugs_bucket_projects_path if current_user.developer?%>
 <%= link_to 'New Project', new_project_path if current_user.manager?%>

@@ -7,6 +7,16 @@ class ProjectsController < ApplicationController
     @projects = current_user.projects
   end
 
+  def test_route
+      sdjsjdskksdjksdjksd
+  end
+
+  def bugs_bucket
+
+   @bugs= current_user.bugs.assigned.with_attached_screenshot 
+    
+  end
+
   # GET /projects/1 or /projects/1.json
   def qa_show
     @new_bugs=@project.bugs.new_bugs.with_attached_screenshot
@@ -14,9 +24,9 @@ class ProjectsController < ApplicationController
     @completed_bugs=@project.bugs.completed.with_attached_screenshot
   end
 
-  def show
+  # def show
 
-  end  
+  # end  
 
   def developer_show
     @new_bugs=@project.bugs.new_bugs.with_attached_screenshot
@@ -30,20 +40,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
   end
-  def assign_bug
-    @bug= Bug.find_by(id: params[:bug_id])
-    cuurent_user.bugs.create(bug_params)
-    
-    respond_to do |format|
-   
-      if  @bug.update(bug_params)
-        format.html { redirect_to @project, notice: "Bug was successfully assigned." }
-        format.json { render :show, status: :updated, location: @project }
-      end   
-    end
 
-  end
-  # POST /projects or /projects.json
   def create
     @project = current_user.projects.create(project_params)
 

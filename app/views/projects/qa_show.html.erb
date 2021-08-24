@@ -20,7 +20,10 @@
   <strong>Type:</strong>
   <%= bug.kind %>
 </p>
-
+<p>
+  <strong>Screenshot:</strong>
+  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached?  %>
+</p>
 <% end%>
 <h1>Assigned Bugs</h1>
 <% @assigned_bugs.each do |bug| %>
@@ -43,7 +46,10 @@
   <strong>Type:</strong>
   <%= bug.kind %>
 </p>
-
+<p>
+  <strong>Screenshot:</strong>
+  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached? %>
+</p>
 <% end%>
 <h1>Completed Bugs</h1>
 <% @completed_bugs.each do |bug| %>
@@ -66,7 +72,11 @@
   <strong>Type:</strong>
   <%= bug.kind %>
 </p>
-
+<p>
+  <strong>Screenshot:</strong>
+  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached? %>
+</p>
+<%= link_to 'Destroy', bug, method: :delete %>
 <% end%>
 <%= link_to 'Add Bug', add_bug_path(@project.id) %>
 <%= link_to 'Back', projects_path %>
