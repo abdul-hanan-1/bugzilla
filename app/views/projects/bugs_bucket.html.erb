@@ -1,0 +1,31 @@
+<h1>My Assigned Bugs</h1>
+<% @bugs.each do |bug| %>
+<p>
+  <strong>Title:</strong>
+  <%= bug.title %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= bug.deadline %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= bug.status %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= bug.kind %>
+</p>
+<p>
+  <strong>Screenshot:</strong>
+  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached? %>
+</p>
+ <%= form_with url: "/bugs/#{bug.id}/mark_completed", method: :patch do |f| %>
+
+        <%= f.hidden_field :status, value: 'completed' %>
+        <p> <%= f.submit 'Mark Done'%></p>
+<% end%>
+<% end%>

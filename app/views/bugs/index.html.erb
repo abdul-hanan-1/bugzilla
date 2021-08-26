@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Bugs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Deadline</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bugs.each do |bug| %>
+      <tr>
+        <td><%= bug.title %></td>
+        <td><%= bug.deadline %></td>
+        <td><%= bug.status %></td>
+        <td><%= bug.type %></td>
+
+        <td><%= image_tag(bug.screenshot) %></td>
+        <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
+        <td><%= link_to 'Destroy', bug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bug', new_bug_path if current_user.manager?%>

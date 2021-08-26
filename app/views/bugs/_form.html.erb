@@ -1,0 +1,40 @@
+<%= form_with(model: bug) do |form| %>
+  <% if bug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+
+      <ul>
+        <% bug.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_area :title %>
+  </div>
+  <div class="field">
+    <%= form.label :screenshot %>
+    <%= form.file_field :screenshot %>
+  </div>
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, ['new','assigned','completed'] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deadline %>
+    <%= form.datetime_select :deadline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.select :type, ['Bug','Feature'] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
