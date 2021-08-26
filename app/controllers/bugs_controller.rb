@@ -3,6 +3,7 @@ class BugsController < ApplicationController
   before_action :authenticate_user!
   # GET /bugs or /bugs.json
   def index
+    authorize Bug
     @bugs = Bug.all
   end
 
@@ -21,6 +22,7 @@ class BugsController < ApplicationController
 
   # POST /bugs or /bugs.json
   def create
+    authorize Bug
     @bug = Bug.new(bug_params)
 
     respond_to do |format|
@@ -36,6 +38,7 @@ class BugsController < ApplicationController
 
   # PATCH/PUT /bugs/1 or /bugs/1.json
   def update
+    authorize Bug
     respond_to do |format|
       if @bug.update(bug_params)
         format.html { redirect_to @bug, notice: "Bug was successfully updated." }
@@ -48,7 +51,7 @@ class BugsController < ApplicationController
   end
 
   def assign_bug   
-     
+      authorize Bug
       current_user.bug_users.create(bug_id: params[:id])
        if @bug.update(status: params[:status])
          redirect_to(request.referrer )
@@ -56,7 +59,7 @@ class BugsController < ApplicationController
     
   end
   def mark_completed   
-     
+       authorize Bug
        if @bug.update(status: params[:status])
          redirect_to(request.referrer )
     
@@ -65,6 +68,7 @@ class BugsController < ApplicationController
 
   # DELETE /bugs/1 or /bugs/1.json
   def destroy
+    authorize Bug
     if @bug.destroy
       redirect_to(request.referrer )
     end

@@ -7,18 +7,15 @@ class ProjectsController < ApplicationController
     @projects = current_user.projects
   end
 
-  def test_route
-      sdjsjdskksdjksdjksd
-  end
-
   def bugs_bucket
-
+   authorize Project
    @bugs= current_user.bugs.assigned.with_attached_screenshot 
     
   end
 
   # GET /projects/1 or /projects/1.json
   def qa_show
+    authorize Project
     @new_bugs=@project.bugs.new_bugs.with_attached_screenshot
     @assigned_bugs=@project.bugs.assigned.with_attached_screenshot
     @completed_bugs=@project.bugs.completed.with_attached_screenshot
@@ -29,6 +26,7 @@ class ProjectsController < ApplicationController
   # end  
 
   def developer_show
+    authorize Project
     @new_bugs=@project.bugs.new_bugs.with_attached_screenshot
   end
 
@@ -42,6 +40,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    authorize Project
     @project = current_user.projects.create(project_params)
 
     respond_to do |format|
@@ -53,6 +52,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    authorize Project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
@@ -66,6 +66,7 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1 or /projects/1.json
   def destroy
+    authorize Project
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
@@ -73,6 +74,7 @@ class ProjectsController < ApplicationController
     end
   end
   def add_user
+    authorize Project
      @developer= User.developers.not_yet_added(@project.id)
      @qa= User.qas.not_yet_added(@project.id)
     if params[:user_id].present?
@@ -85,7 +87,7 @@ class ProjectsController < ApplicationController
     end
   end  
   def remove_user
-
+    authorize Project
     projectu = @project.project_users.find_by(user_id: params[:user_id])
     puts projectu
     projectu.destroy
@@ -96,22 +98,13 @@ class ProjectsController < ApplicationController
     
   end
   def add_bug 
-    
+    authorize Project
   end  
 
   def create_bug
-    if params.has_key?("commit")
-      puts "--------------------------------------"   
       @project = Project.find(params[:id])  
       a = @project.bugs.new(bug_params)
-      if a.save 
-      puts "success"
-      else 
-      puts "-"*50, a.errors.full_messages.join(", ")   
-      end
-
-    end
-      
+      a.save     
       respond_to do |format|
         format.html { redirect_to qa_show_url(@project.id), notice: "Bug was successfully added." }
         format.json { head :no_content }

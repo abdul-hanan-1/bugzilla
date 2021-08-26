@@ -7,6 +7,7 @@ ruby '2.7.0'
 gem 'rails', '~> 6.1.4'
 gem 'image_processing', '~> 1.2'
 gem "mini_magick"
+gem 'pundit' 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'devise', '~> 4.8'
