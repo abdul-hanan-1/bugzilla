@@ -25,7 +25,6 @@
         <td><%= developer.name.capitalize %></td>
         <%= f.hidden_field :user_id, value: developer.id %>
         <td> <%= f.submit 'Remove'%></td>
-
       </tr>
     <% end %>
   </tbody>
@@ -46,8 +45,7 @@
       <tr>
         <td><%= qa.name.capitalize %></td>
         <%= f.hidden_field :user_id, value: qa.id %>
-        <td> <%= f.submit 'Remove'%></td>
-        
+        <td> <%= f.submit 'Remove'%></td>        
       </tr>
     <% end %>
   </tbody>

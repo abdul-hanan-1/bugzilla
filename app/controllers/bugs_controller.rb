@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BugsController < ApplicationController
   before_action :set_bug, only: %i[assign_bug show edit update destroy mark_completed]
   before_action :authenticate_user!
@@ -8,8 +10,7 @@ class BugsController < ApplicationController
   end
 
   # GET /bugs/1 or /bugs/1.json
-  def show
-  end
+  def show; end
 
   # GET /bugs/new
   def new
@@ -17,8 +18,7 @@ class BugsController < ApplicationController
   end
 
   # GET /bugs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /bugs or /bugs.json
   def create
@@ -27,7 +27,7 @@ class BugsController < ApplicationController
 
     respond_to do |format|
       if @bug.save
-        format.html { redirect_to @bug, notice: "Bug was successfully created." }
+        format.html { redirect_to @bug, notice: 'Bug was successfully created.' }
         format.json { render :show, status: :created, location: @bug }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class BugsController < ApplicationController
     authorize Bug
     respond_to do |format|
       if @bug.update(bug_params)
-        format.html { redirect_to @bug, notice: "Bug was successfully updated." }
+        format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
         format.json { render :show, status: :ok, location: @bug }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,38 +50,32 @@ class BugsController < ApplicationController
     end
   end
 
-  def assign_bug   
-      authorize Bug
-      current_user.bug_users.create(bug_id: params[:id])
-       if @bug.update(status: params[:status])
-         redirect_to(request.referrer )
-       end
-    
+  def assign_bug
+    authorize Bug
+    current_user.bug_users.create(bug_id: params[:id])
+    redirect_to(request.referrer) if @bug.update(status: params[:status])
   end
-  def mark_completed   
-       authorize Bug
-       if @bug.update(status: params[:status])
-         redirect_to(request.referrer )
-    
-     end
+
+  def mark_completed
+    authorize Bug
+    redirect_to(request.referrer) if @bug.update(status: params[:status])
   end
 
   # DELETE /bugs/1 or /bugs/1.json
   def destroy
     authorize Bug
-    if @bug.destroy
-      redirect_to(request.referrer )
-    end
+    redirect_to(request.referrer) if @bug.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_bug
-      @bug = Bug.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def bug_params
-      params.require(:bug).permit(:title, :deadline, :kind, :screenshot,:status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_bug
+    @bug = Bug.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def bug_params
+    params.require(:bug).permit(:title, :deadline, :kind, :screenshot, :status)
+  end
 end

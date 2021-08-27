@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BugPolicy
   attr_reader :user, :bug
 
@@ -9,25 +11,24 @@ class BugPolicy
   def update?
     user.qa? || user.developer?
   end
-  
+
   def show?
-    user.manager? 
+    user.manager?
   end
 
   def create?
-    user.qa? 
+    user.qa?
   end
-  
+
   def destroy?
-    user.qa? 
+    user.qa?
   end
 
   def assign_bug?
-    user.developer? 
+    user.developer?
   end
 
   def mark_completed?
-    user.developer? 
+    user.developer?
   end
-
 end
