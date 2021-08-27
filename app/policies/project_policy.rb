@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProjectPolicy
   attr_reader :user, :project
 
@@ -7,43 +9,42 @@ class ProjectPolicy
   end
 
   def update?
-    user.manager? 
+    user.manager?
   end
-  
+
   def show?
-    user.manager? 
+    user.manager?
   end
-  
+
   def qa_show?
-    user.qa? 
+    user.qa?
   end
-  
+
   def developer_show?
-    user.developer? 
+    user.developer?
   end
 
   def create?
-    user.manager? 
+    user.manager?
   end
-  
+
   def destroy?
-    user.manager? 
+    user.manager?
   end
 
   def add_user?
-    user.manager? 
+    user.manager?
   end
 
   def remove_user?
-    user.manager? 
+    user.manager?
   end
 
   def bugs_bucket?
-    user.developer? 
+    user.developer?
   end
 
   def add_bug?
-    user.qa? 
+    user.qa?
   end
-
 end

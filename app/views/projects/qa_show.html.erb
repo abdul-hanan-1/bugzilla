@@ -1,82 +1,73 @@
-
 <h1>New Bugs</h1>
-<% @new_bugs.each do |bug| %>
-<p>
-  <strong>Title:</strong>
-  <%= bug.title %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= bug.deadline %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= bug.status %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= bug.kind %>
-</p>
-<p>
-  <strong>Screenshot:</strong>
-  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached?  %>
-</p>
-<% end%>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @new_bugs.each do |bug| %>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+          <div class="card-body">
+            <h5 class="card-title">Title</h5>
+            <p class="card-text"><%= bug.title %></p>
+            <h5 class="card-title">Type</h5>
+            <p class="card-text"><%= bug.kind %></p>
+            <h5 class="card-title">Deadline</h5>
+            <p class="card-text"><%= bug.deadline %></p>
+            <h5 class="card-title">Status</h5>
+            <p class="card-text"><%= bug.status %></p>
+          </div>
+        </div>
+      </div>
+    <% end%>
+  </div>
+</div>
+<br>
 <h1>Assigned Bugs</h1>
-<% @assigned_bugs.each do |bug| %>
-<p>
-  <strong>Title:</strong>
-  <%= bug.title %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= bug.deadline %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= bug.status %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= bug.kind %>
-</p>
-<p>
-  <strong>Screenshot:</strong>
-  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached? %>
-</p>
-<% end%>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @assigned_bugs.each do |bug| %>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+          <div class="card-body">
+            <h5 class="card-title">Title</h5>
+            <p class="card-text"><%= bug.title %></p>
+            <h5 class="card-title">Type</h5>
+            <p class="card-text"><%= bug.kind %></p>
+            <h5 class="card-title">Deadline</h5>
+            <p class="card-text"><%= bug.deadline %></p>
+            <h5 class="card-title">Status</h5>
+            <p class="card-text"><%= bug.status %></p>
+          </div>
+        </div>
+      </div>
+    <% end%>
+  </div>
+</div>
+<br>
 <h1>Completed Bugs</h1>
-<% @completed_bugs.each do |bug| %>
-<p>
-  <strong>Title:</strong>
-  <%= bug.title %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= bug.deadline %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= bug.status %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= bug.kind %>
-</p>
-<p>
-  <strong>Screenshot:</strong>
-  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached? %>
-</p>
-<%= link_to 'Destroy', bug, method: :delete %>
-<% end%>
-<%= link_to 'Add Bug', add_bug_path(@project.id) %>
-<%= link_to 'Back', projects_path %>
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <% @completed_bugs.each do |bug| %>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+          <div class="card-body">
+            <h5 class="card-title">Title</h5>
+            <p class="card-text"><%= bug.title %></p>
+            <h5 class="card-title">Type</h5>
+            <p class="card-text"><%= bug.kind %></p>
+            <h5 class="card-title">Deadline</h5>
+            <p class="card-text"><%= bug.deadline %></p>
+            <h5 class="card-title">Status</h5>
+            <p class="card-text"><%= bug.status %></p>
+            <%= link_to 'Delete', bug, method: :delete , class: "btn btn-danger"%>
+          </div>
+        </div>
+      </div>
+    <% end%>
+  </div>
+</div>
+<br>
+<br>
+<%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "btn btn-primary"%>
+<%= link_to 'Back', projects_path ,class: "btn btn-primary" %>

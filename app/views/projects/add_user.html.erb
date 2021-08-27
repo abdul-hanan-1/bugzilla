@@ -5,7 +5,7 @@
 
 <%= link_to 'Home', root_path, {style: 'float: right; padding-right: 10%'} %>
 <br><br>
-
+<%= form_with(url: "/projects/#{@project.id}/add_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
 <table style="margin-left: 20%; width: 60%">
   <thead>
   <tr>
@@ -17,7 +17,7 @@
   <tbody>
   <% @developer.each do |developer| %>
     <tr>
-      <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
+      
         <%= f.hidden_field :user_id , value: developer.id%>
 
       <input type="hidden" name="user_id" value="<%= developer.id %>">
@@ -25,13 +25,15 @@
         <td>
           <%= f.submit 'Add to Project'%>
         </td>
-      <% end %>
+      
 
     </tr>
   <% end %>
   </tbody>
+  <% end %>
 </table>
 <h1 style="text-align: center">Add QA in <%= @project.title %></h1>
+<%= form_with(url: "/projects/#{@project.id}/add_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
 <table style="margin-left: 20%; width: 60%">
   <thead>
   <tr>
@@ -43,7 +45,7 @@
   <tbody>
   <% @qa.each do |qa| %>
     <tr>
-      <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
+      
         <%= f.hidden_field :user_id , value: qa.id%>
 
       <input type="hidden" name="user_id" value="<%= qa.id %>">
@@ -51,9 +53,9 @@
         <td>
           <%= f.submit 'Add to Project'%>
         </td>
-      <% end %>
 
     </tr>
   <% end %>
   </tbody>
 </table>
+<% end %>

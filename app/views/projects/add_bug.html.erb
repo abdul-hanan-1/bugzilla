@@ -1,27 +1,42 @@
-<h1>New Bug</h1>
+<div class="container">
+  <br>
+  <h1>New Bug</h1>
 
-  <%= form_with(scope: :bug, url: create_bug_projects_path, method: "post", html: {style: 'text-align: center'}) do |form|%>
-  <%= hidden_field :project_id, value: @project.id%>
-  <%= form.hidden_field :status, value: 'new'%>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_area :title %>
-  </div>
-  <div class="field">
-    <%= form.label :screenshot %>
-    <%= form.file_field :screenshot %>
-  </div>
-  <div class="field">
-    <%= form.label :deadline %>
-    <%= form.datetime_select :deadline %>
-  </div>
+    <%= form_with(scope: :bug, url: create_bug_projects_path, method: "post") do |form|%>
+    <%= hidden_field :project_id, value: @project.id%>
+    <%= form.hidden_field :status, value: 'new'%>
+    <div class="field">
+      <%= form.label :title , class: "form-label" %>
+      <%= form.text_area :title , class: "form-control"%>
+    </div>
 
-  <div class="field">
-    <%= form.label :kind %>
-    <%= form.select :kind, ['Bug','Feature'] %>
-  </div>
+    <br>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= form.label :screenshot , class: "form-label"%>
+      <%= form.file_field :screenshot , class: "form-control"%>
+    </div>
+
+    <br>
+
+    <div class="field">
+      <%= form.label :deadline , class: "form-label"%>
+      <br>
+      <%= form.datetime_select :deadline , class: "form-control"%>
+    </div>
+
+    <br>
+
+    <div class="field">
+      <%= form.label :kind , class: "form-label"%>
+      <br>
+      <%= form.select :kind, ['Bug','Feature'], class: "form-select"%>
+    </div>
+
+    <br>
+
+    <div class="actions">
+      <%= form.submit 'Add',class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>

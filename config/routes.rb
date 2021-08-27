@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :projects do
     collection do
@@ -7,10 +9,10 @@ Rails.application.routes.draw do
   resources :bugs
   devise_for :users
   authenticated :user do
-    root :to => 'projects#index', as: :authenticated_root
+    root to: 'projects#index', as: :authenticated_root
   end
-  root to: "static#index"
-  patch 'bugs/:id/assign_bug', to: 'bugs#assign_bug', as: 'assign_bug' 
+  root to: 'static#index'
+  patch 'bugs/:id/assign_bug', to: 'bugs#assign_bug', as: 'assign_bug'
   patch 'bugs/:id/mark_completed', to: 'bugs#mark_completed', as: 'mark_completed'
   get 'projects/test_route', to: 'projects#test_route'
   get 'projects/qa_show/:id', to: 'projects#qa_show', as: 'qa_show'

@@ -1,11 +1,15 @@
-<p id="notice"><%= notice %></p>
-
+<% unless notice.nil? %>
+  <div class="alert alert-success">
+    <%= notice %>
+  </div>
+<% end %>
+<br>
 <h1>Projects</h1>
 
-<table>
-  <thead>
+<table class="table table-striped table-hover table-bordered">
+  <thead class="thead-dark">
     <tr>
-      <th>Title</th>
+      <th>Project</th>
       <th>Manager</th>
       <th colspan="3"></th>
     </tr>
