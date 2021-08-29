@@ -1,70 +1,111 @@
-<h1>New Bugs</h1>
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% @new_bugs.each do |bug| %>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
-          <div class="card-body">
-            <h5 class="card-title">Title</h5>
-            <p class="card-text"><%= bug.title %></p>
-            <h5 class="card-title">Type</h5>
-            <p class="card-text"><%= bug.kind %></p>
-            <h5 class="card-title">Deadline</h5>
-            <p class="card-text"><%= bug.deadline %></p>
-            <h5 class="card-title">Status</h5>
-            <p class="card-text"><%= bug.status %></p>
-          </div>
+<h1 class="text-white font-weight-bold fw-light" style="text-align: center;">Bugs in <%= @project.title%></h1>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        New Bugs
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="container justify-content-center">
+          <% if @new_bugs.count > 0 %>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <% @new_bugs.each do |bug| %>
+                <div class="col">
+                  <div class="card" style="width: 18rem;">
+                    <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+                    <div class="card-body" style="background-color: #bdaaa5">
+                      <h5 class="card-title">Title</h5>
+                      <p class="card-text"><%= bug.title %></p>
+                      <h5 class="card-title">Type</h5>
+                      <p class="card-text"><%= bug.kind %></p>
+                      <h5 class="card-title">Deadline</h5>
+                      <p class="card-text"><%= bug.deadline %></p>
+                      <h5 class="card-title">Status</h5>
+                      <p class="card-text"><%= bug.status %></p>
+                    </div>
+                  </div>
+                </div>
+              <% end%>
+            </div>
+          <%else%>
+            There are no new bugs.
+          <%end%>    
         </div>
       </div>
-    <% end%>
+    </div>
   </div>
-</div>
-<br>
-<h1>Assigned Bugs</h1>
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% @assigned_bugs.each do |bug| %>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
-          <div class="card-body">
-            <h5 class="card-title">Title</h5>
-            <p class="card-text"><%= bug.title %></p>
-            <h5 class="card-title">Type</h5>
-            <p class="card-text"><%= bug.kind %></p>
-            <h5 class="card-title">Deadline</h5>
-            <p class="card-text"><%= bug.deadline %></p>
-            <h5 class="card-title">Status</h5>
-            <p class="card-text"><%= bug.status %></p>
-          </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Assigned Bugs
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="container justify-content-center">
+          <% if @assigned_bugs.count > 0 %>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <% @assigned_bugs.each do |bug| %>
+                <div class="col">
+                  <div class="card" style="width: 18rem;">
+                    <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+                    <div class="card-body" style="background-color: #bdaaa5">
+                      <h5 class="card-title">Title</h5>
+                      <p class="card-text"><%= bug.title %></p>
+                      <h5 class="card-title">Type</h5>
+                      <p class="card-text"><%= bug.kind %></p>
+                      <h5 class="card-title">Deadline</h5>
+                      <p class="card-text"><%= bug.deadline %></p>
+                      <h5 class="card-title">Status</h5>
+                      <p class="card-text"><%= bug.status %></p>
+                    </div>
+                  </div>
+                </div>
+              <% end%>
+            </div>
+          <%else%>
+            There are no assigned bugs.
+          <%end%>    
         </div>
       </div>
-    <% end%>
+    </div>
   </div>
-</div>
-<br>
-<h1>Completed Bugs</h1>
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <% @completed_bugs.each do |bug| %>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
-          <div class="card-body">
-            <h5 class="card-title">Title</h5>
-            <p class="card-text"><%= bug.title %></p>
-            <h5 class="card-title">Type</h5>
-            <p class="card-text"><%= bug.kind %></p>
-            <h5 class="card-title">Deadline</h5>
-            <p class="card-text"><%= bug.deadline %></p>
-            <h5 class="card-title">Status</h5>
-            <p class="card-text"><%= bug.status %></p>
-            <%= link_to 'Delete', bug, method: :delete , class: "btn btn-danger"%>
-          </div>
-        </div>
-      </div>
-    <% end%>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        Completed Bugs
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body"><div class="container justify-content-center">
+          <% if @completed_bugs.count > 0 %>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <% @completed_bugs.each do |bug| %>
+                <div class="col">
+                  <div class="card" style="width: 18rem;">
+                    <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+                    <div class="card-body" style="background-color: #bdaaa5">
+                      <h5 class="card-title">Title</h5>
+                      <p class="card-text"><%= bug.title %></p>
+                      <h5 class="card-title">Type</h5>
+                      <p class="card-text"><%= bug.kind %></p>
+                      <h5 class="card-title">Deadline</h5>
+                      <p class="card-text"><%= bug.deadline %></p>
+                      <h5 class="card-title">Status</h5>
+                      <p class="card-text"><%= bug.status %></p>
+                      <%= link_to 'Delete', bug, method: :delete , class: "btn btn-danger"%>
+                    </div>
+                  </div>
+                </div>
+              <% end%>
+            </div>
+          <%else%>
+            There are no completed bugs yet.
+          <%end%>    
+        </div></div>
+    </div>
   </div>
 </div>
 <br>

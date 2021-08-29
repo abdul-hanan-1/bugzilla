@@ -1,31 +1,32 @@
-<h1>My Assigned Bugs</h1>
-<% @bugs.each do |bug| %>
-<p>
-  <strong>Title:</strong>
-  <%= bug.title %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= bug.deadline %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= bug.status %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= bug.kind %>
-</p>
-<p>
-  <strong>Screenshot:</strong>
-  <%= image_tag bug.screenshot.variant(resize: "300x300") if bug.screenshot.attached? %>
-</p>
- <%= form_with url: "/bugs/#{bug.id}/mark_completed", method: :patch do |f| %>
-
-        <%= f.hidden_field :status, value: 'completed' %>
-        <p> <%= f.submit 'Mark Done'%></p>
-<% end%>
-<% end%>
+<h1 class="text-white fw-light" style="text-align: center;">My assigned bugs.</h1>
+<br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% if @bugs.count>0 %>
+    <% @bugs.each do |bug| %>
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
+          <div class="card-body" style="background-color: #bdaaa5">
+            <h5 class="card-title">Title</h5>
+            <p class="card-text"><%= bug.title %></p>
+            <h5 class="card-title">Type</h5>
+            <p class="card-text"><%= bug.kind %></p>
+            <h5 class="card-title">Deadline</h5>
+            <p class="card-text"><%= bug.deadline %></p>
+            <h5 class="card-title">Status</h5>
+            <p class="card-text"><%= bug.status %></p>
+            <%= form_with url: "/bugs/#{bug.id}/mark_completed", method: :patch do |f| %>
+              <%= f.hidden_field :status, value: 'completed' %>
+              <%= f.submit 'Mark Completed' ,class: "btn btn-success"%>
+            <% end%>
+          </div>
+        </div>
+      </div>
+    <% end%>
+  <%else%>
+    <br><br>
+    <h3 class="text-white fw-light" style="margin-left: 30px;">You don't have any bugs assigned at the moment.  </h3>  
+  <%end%>
+</div>
+<br>
+<%= link_to 'Back', projects_path ,class: "btn btn-primary" %>

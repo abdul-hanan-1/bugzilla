@@ -1,10 +1,12 @@
-<h1>Bugs Bucket</h1>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+<h1 class="text-white fw-light" style="text-align: center;">Bugs in <%= @project.title.capitalize %></h1>
+<br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% if @new_bugs.count>0 %>
     <% @new_bugs.each do |bug| %>
       <div class="col">
         <div class="card" style="width: 18rem;">
           <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
-          <div class="card-body">
+          <div class="card-body" style="background-color: #bdaaa5">
             <h5 class="card-title">Title</h5>
             <p class="card-text"><%= bug.title %></p>
             <h5 class="card-title">Type</h5>
@@ -15,11 +17,16 @@
             <p class="card-text"><%= bug.status %></p>
             <%= form_with url: "/bugs/#{bug.id}/assign_bug", method: :patch do |f| %>
               <%= f.hidden_field :status, value: 'assigned' %>
-              <%= f.submit 'Assign to yourself' ,class: "btn-btn-secondary"%>
+              <%= f.submit 'Assign to yourself' ,class: "btn btn-primary"%>
             <% end%>
           </div>
         </div>
       </div>
     <% end%>
-  </div>
-
+  <%else%>
+    <br><br>
+    <h3 class="text-white fw-light" style="margin-left: 30px;">Currently there are no bugs in <%= @project.title.capitalize %> </h3>  
+  <%end%>
+</div>
+<br>
+<%= link_to 'Back', projects_path ,class: "btn btn-primary" %>

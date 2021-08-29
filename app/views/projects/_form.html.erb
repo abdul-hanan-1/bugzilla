@@ -1,4 +1,3 @@
-<div class="container">
 <%= form_with(model: project) do |form| %>
   <% if project.errors.any? %>
     <div id="error_explanation">
@@ -15,17 +14,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title ,class: "form-label"%>
-    <%= form.text_field :title , class: "form-control" %>
+    <%= form.label :title , class: "text-white font-weight-bold"%>
+    <br>
+    <%= form.text_field :title  %>
   </div>
 
   <div class="field">
-    <%= form.label :manager ,class: "form-label"%>
-    <%= form.text_field :manager , class: "form-control"%>
+    <%= form.label :manager , class: "text-white font-weight-bold"%>
+    <br>
+    <%= form.text_field :manager %>
   </div>
   <br>
   <div class="actions">
-    <%= form.submit 'Save',class: "btn btn-secondary" %>
+    <%= form.submit 'Save',class: "btn btn-primary btn-xl" %>
   </div>
 <% end %>
-</div>

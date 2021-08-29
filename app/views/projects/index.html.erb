@@ -1,21 +1,23 @@
 
-<br>
-<h1 class="text-white font-weight-bold">Projects</h1>
+<h1 class="text-white font-weight-bold fw-light" style="text-align: center;">Projects</h1>
 
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered" style="background-color: white;">
   <thead class="thead-dark">
     <tr>
       <th>Project</th>
       <th>Manager</th>
-      <th colspan="3"></th>
+      <th>Developers</th>
+      <th>QAs</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.title %></td>
         <td><%= project.manager %></td>
+        <td><ul><% project.users.developers.each do |developer|%><li><%= developer.name.capitalize %></li><%end%></ul></td>
+        <td><ul><% project.users.qas.each do |qa|%><li><%= qa.name.capitalize %></li><%end%></ul></td>
         <td><%= link_to 'Show', project if current_user.manager?%><%= link_to 'Show',qa_show_path(project) if current_user.qa?%><%= link_to 'Show',developer_show_path(project) if current_user.developer?%></td>
         <td><%= link_to 'Add User', add_user_path(project.id) if current_user.manager?%></td>
         <td><%= link_to 'Edit', edit_project_path(project) if current_user.manager?%></td>
@@ -26,5 +28,5 @@
 </table>
 
 <br>
-<%= link_to 'My Bugs Bucket', bugs_bucket_projects_path if current_user.developer?%>
+<%= link_to 'My Bugs Bucket', bugs_bucket_projects_path, class: "btn btn-primary btn-xl" if current_user.developer?%>
 <%= link_to 'New Project', new_project_path,class: "btn btn-primary btn-xl" if current_user.manager?%>

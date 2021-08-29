@@ -1,61 +1,57 @@
-
-<h1 style="text-align: center">Add Developer in <%= @project.title %></h1>
-
-
-
-<%= link_to 'Home', root_path, {style: 'float: right; padding-right: 10%'} %>
-<br><br>
-<%= form_with(url: "/projects/#{@project.id}/add_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
-<table style="margin-left: 20%; width: 60%">
-  <thead>
-  <tr>
-    <th>Developers</th>
-    <th colspan="1">Action</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @developer.each do |developer| %>
-    <tr>
-      
-        <%= f.hidden_field :user_id , value: developer.id%>
-
-      <input type="hidden" name="user_id" value="<%= developer.id %>">
-        <td><%= developer.name  %><%= developer.id  %></td>
-        <td>
-          <%= f.submit 'Add to Project'%>
-        </td>
-      
-
-    </tr>
-  <% end %>
-  </tbody>
-  <% end %>
-</table>
-<h1 style="text-align: center">Add QA in <%= @project.title %></h1>
-<%= form_with(url: "/projects/#{@project.id}/add_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
-<table style="margin-left: 20%; width: 60%">
-  <thead>
-  <tr>
-    <th>QAs</th>
-    <th colspan="1">Action</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @qa.each do |qa| %>
-    <tr>
-      
-        <%= f.hidden_field :user_id , value: qa.id%>
-
-      <input type="hidden" name="user_id" value="<%= qa.id %>">
-        <td><%= qa.name %></td>
-        <td>
-          <%= f.submit 'Add to Project'%>
-        </td>
-
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% end %>
+<header class="masthead" style="padding-bottom: 20rem; height: auto;">
+    <div class="container px-4 px-lg-5 h-100" style="padding-top: 3rem;">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <h3 class="text-white font-weight-bold">Add developer in <%= @project.title %></h3>
+                <hr class="divider" />
+                <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post") do |f|%>
+                <table class="table table-striped table-hover table-bordered" style="background-color: white">
+                  <thead>
+                  <tr>
+                    <th>Developers</th>
+                    <th colspan="1">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @developer.each do |developer| %>
+                    <tr>
+                        <%= f.hidden_field :user_id , value: developer.id%>
+                        <input type="hidden" name="user_id" value="<%= developer.id %>">
+                        <td><%= developer.name  %><%= developer.id  %></td>
+                        <td>
+                          <%= f.submit 'Add to Project' , class: "btn btn-primary"%>
+                        </td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                  <% end %>
+                </table>
+                <h3 class="text-white font-weight-bold">Add QA in <%= @project.title %></h3>
+                <hr class="divider" />
+                <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post") do |f|%>
+                <table class="table table-striped table-hover table-bordered" style="background-color: white">
+                  <thead>
+                  <tr>
+                    <th>QAs</th>
+                    <th colspan="1">Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @qa.each do |qa| %>
+                    <tr>
+                      <%= f.hidden_field :user_id , value: qa.id%>
+                      <input type="hidden" name="user_id" value="<%= qa.id %>">
+                      <td><%= qa.name %></td>
+                      <td>
+                        <%= f.submit 'Add to Project' , class: "btn btn-primary"%>
+                      </td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+                <% end %>
+        </div>
+    </div>
+</header>  
+<br>
+<%= link_to 'Back', projects_path, class: "btn btn-primary" %>              

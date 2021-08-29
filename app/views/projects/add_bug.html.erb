@@ -1,52 +1,59 @@
-<div class="container">
-  <br>
-  <h1>New Bug</h1>
-    
-    <%= form_with(model: @bug, url: create_bug_projects_path, method: "post") do |form|%>
-    <% if @bug.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
-        <ul>
-          <% @bug.errors.each do |error| %>
-            <li><%= error.full_message %></li>
+<header class="masthead" style="padding-top: 5rem;">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <h1 class="text-white font-weight-bold">Add New Bug</h1>
+                <hr class="divider" />
+            </div>   
+            <%= form_with(model: @bug, url: create_bug_projects_path, method: "post") do |form|%>
+            <% if @bug.errors.any? %>
+              <div id="error_explanation">
+                <h2  class= "text-white font-weight-bold"><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+                <% @bug.errors.each do |error| %>
+                  <div class="alert alert-danger" role="alert">
+                    <li><%= error.full_message %></li>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+            <%= hidden_field :project_id, value: @project.id%>
+            <%= form.hidden_field :status, value: 'new'%>
+            <div class="field">
+              <%= form.label :title , class: "text-white font-weight-bold" %>
+              <br>
+              <%= form.text_field :title %>
+            </div>
+
+            <br>
+
+            <div class="field">
+              <%= form.label :screenshot , class: "text-white font-weight-bold"%>
+              <br>
+              <%= form.file_field :screenshot , class: "text-white font-weight-bold"%>
+            </div>
+
+            <br>
+
+            <div class="field">
+              <%= form.label :deadline , class: "text-white font-weight-bold"%>
+              <br>
+              <%= form.datetime_select :deadline%>
+            </div>
+
+            <br>
+
+            <div class="field">
+              <%= form.label :kind , class: "text-white font-weight-bold"%>
+              <br>
+              <%= form.select :kind, ['Bug','Feature'], class: "form-select"%>
+            </div>
+
+            <br>
+
+            <div class="d-grid">
+              <%= form.submit 'Add',class: "btn btn-primary btn-xl" %>
+            </div>
           <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <%= hidden_field :project_id, value: @project.id%>
-    <%= form.hidden_field :status, value: 'new'%>
-    <div class="field">
-      <%= form.label :title , class: "form-label" %>
-      <%= form.text_area :title , class: "form-control"%>
+        </div>
     </div>
-
-    <br>
-
-    <div class="field">
-      <%= form.label :screenshot , class: "form-label"%>
-      <%= form.file_field :screenshot , class: "form-control"%>
-    </div>
-
-    <br>
-
-    <div class="field">
-      <%= form.label :deadline , class: "form-label"%>
-      <br>
-      <%= form.datetime_select :deadline , class: "form-control"%>
-    </div>
-
-    <br>
-
-    <div class="field">
-      <%= form.label :kind , class: "form-label"%>
-      <br>
-      <%= form.select :kind, ['Bug','Feature'], class: "form-select"%>
-    </div>
-
-    <br>
-
-    <div class="actions">
-      <%= form.submit 'Add',class: "btn btn-secondary" %>
-    </div>
-  <% end %>
-</div>
+</header>

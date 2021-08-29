@@ -79,7 +79,7 @@ class ProjectsController < ApplicationController
 
       @project.project_users.create(user_id: params[:user_id])
       respond_to do |format|
-        format.html { redirect_to projects_url, notice: 'User was successfully added to book.' }
+        format.html { redirect_to projects_url, notice: 'User was successfully added to project.' }
         format.json { head :no_content }
       end
     end
