@@ -1,10 +1,6 @@
-<% unless notice.nil? %>
-  <div class="alert alert-success">
-    <%= notice %>
-  </div>
-<% end %>
+
 <br>
-<h1>Projects</h1>
+<h1 class="text-white font-weight-bold">Projects</h1>
 
 <table class="table table-striped table-hover table-bordered">
   <thead class="thead-dark">
@@ -31,4 +27,4 @@
 
 <br>
 <%= link_to 'My Bugs Bucket', bugs_bucket_projects_path if current_user.developer?%>
-<%= link_to 'New Project', new_project_path if current_user.manager?%>
+<%= link_to 'New Project', new_project_path,class: "btn btn-primary btn-xl" if current_user.manager?%>

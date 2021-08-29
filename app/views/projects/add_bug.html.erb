@@ -1,8 +1,18 @@
 <div class="container">
   <br>
   <h1>New Bug</h1>
-
-    <%= form_with(scope: :bug, url: create_bug_projects_path, method: "post") do |form|%>
+    
+    <%= form_with(model: @bug, url: create_bug_projects_path, method: "post") do |form|%>
+    <% if @bug.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+        <ul>
+          <% @bug.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <%= hidden_field :project_id, value: @project.id%>
     <%= form.hidden_field :status, value: 'new'%>
     <div class="field">

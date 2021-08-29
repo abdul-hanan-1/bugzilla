@@ -22,10 +22,6 @@ class ProjectsController < ApplicationController
     @completed_bugs = @project.bugs.completed.with_attached_screenshot
   end
 
-  # def show
-
-  # end
-
   def developer_show
     authorize Project
     @new_bugs = @project.bugs.new_bugs.with_attached_screenshot
@@ -37,7 +33,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit; end
+  def edit
+
+  end
 
   def create
     authorize Project
@@ -100,15 +98,20 @@ class ProjectsController < ApplicationController
 
   def add_bug
     authorize Project
+    @bug=Bug.new
   end
 
   def create_bug
     @project = Project.find(params[:id])
-    a = @project.bugs.new(bug_params)
-    a.save
+    @bug = @project.bugs.new(bug_params)
     respond_to do |format|
-      format.html { redirect_to qa_show_url(@project.id), notice: 'Bug was successfully added.' }
-      format.json { head :no_content }
+      if @bug.save
+        format.html { redirect_to qa_show_url(@project.id), notice: 'Bug was successfully added.' }
+        format.json { head :no_content }
+      else
+        format.html { render :add_bug, status: :unprocessable_entity }
+        format.json { render json: @bug.errors, status: :unprocessable_entity }  
+      end  
     end
   end
 

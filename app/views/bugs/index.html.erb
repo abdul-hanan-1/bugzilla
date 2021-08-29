@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Bugs</h1>
 
@@ -19,7 +18,7 @@
         <td><%= bug.title %></td>
         <td><%= bug.deadline %></td>
         <td><%= bug.status %></td>
-        <td><%= bug.type %></td>
+        <td><%= bug.kind %></td>
 
         <td><%= image_tag(bug.screenshot) %></td>
         <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
