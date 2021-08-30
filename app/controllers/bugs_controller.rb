@@ -64,6 +64,9 @@ class BugsController < ApplicationController
   # DELETE /bugs/1 or /bugs/1.json
   def destroy
     authorize Bug
+    if @bug.screenshot.attached?
+      @bug.screenshot.purge_later
+    end  
     redirect_to(request.referrer) if @bug.destroy
   end
 
