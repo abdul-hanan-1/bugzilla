@@ -4,8 +4,8 @@
             <div class="col-lg-8 align-self-end">
                 <h3 class="text-white font-weight-bold">Add developer in <%= @project.title %></h3>
                 <hr class="divider" />
+                <% if @developer.count>0 %>
                 <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post") do |f|%>
-                <% if @developer.count>0%>
                   <table class="table table-striped table-hover table-bordered" style="background-color: white">
                     <thead>
                     <tr>
@@ -28,12 +28,12 @@
                     <% end %>
                   </table>
                 <%else%>
-                  <h5>There are no developers available at the moment.</h5> 
+                  <h5 class="text-white font-weight-bold">There are no developers available at the moment.</h5> 
                 <%end%>   
                 <h3 class="text-white font-weight-bold">Add QA in <%= @project.title %></h3>
                 <hr class="divider" />
+                <% if @qa.count>0 %>
                 <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post") do |f|%>
-                <% if @qa.count>0%>
                   <table class="table table-striped table-hover table-bordered" style="background-color: white">
                     <thead>
                     <tr>
@@ -53,11 +53,11 @@
                       </tr>
                     <% end %>
                     </tbody>
+                    <% end %>
                   </table>
                 <%else%>
-                  <h5>There are no QAs available at the moment.</h5> 
+                  <h5 class="text-white font-weight-bold">There are no QAs available at the moment.</h5> 
                 <%end%>   
-                <% end %>
         </div>
     </div>
 </header>  
