@@ -5,50 +5,58 @@
                 <h3 class="text-white font-weight-bold">Add developer in <%= @project.title %></h3>
                 <hr class="divider" />
                 <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post") do |f|%>
-                <table class="table table-striped table-hover table-bordered" style="background-color: white">
-                  <thead>
-                  <tr>
-                    <th>Developers</th>
-                    <th colspan="1">Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <% @developer.each do |developer| %>
+                <% if @developer.count>0%>
+                  <table class="table table-striped table-hover table-bordered" style="background-color: white">
+                    <thead>
                     <tr>
-                        <%= f.hidden_field :user_id , value: developer.id%>
-                        <input type="hidden" name="user_id" value="<%= developer.id %>">
-                        <td><%= developer.name  %><%= developer.id  %></td>
-                        <td>
-                          <%= f.submit 'Add to Project' , class: "btn btn-primary"%>
-                        </td>
+                      <th>Developers</th>
+                      <th colspan="1">Action</th>
                     </tr>
-                  <% end %>
-                  </tbody>
-                  <% end %>
-                </table>
+                    </thead>
+                    <tbody>
+                    <% @developer.each do |developer| %>
+                      <tr>
+                          <%= f.hidden_field :user_id , value: developer.id%>
+                          <input type="hidden" name="user_id" value="<%= developer.id %>">
+                          <td><%= developer.name  %><%= developer.id  %></td>
+                          <td>
+                            <%= f.submit 'Add to Project' , class: "btn btn-primary"%>
+                          </td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                    <% end %>
+                  </table>
+                <%else%>
+                  <h5>There are no developers available at the moment.</h5> 
+                <%end%>   
                 <h3 class="text-white font-weight-bold">Add QA in <%= @project.title %></h3>
                 <hr class="divider" />
                 <%= form_with(url: "/projects/#{@project.id}/add_user", method: "post") do |f|%>
-                <table class="table table-striped table-hover table-bordered" style="background-color: white">
-                  <thead>
-                  <tr>
-                    <th>QAs</th>
-                    <th colspan="1">Action</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <% @qa.each do |qa| %>
+                <% if @qa.count>0%>
+                  <table class="table table-striped table-hover table-bordered" style="background-color: white">
+                    <thead>
                     <tr>
-                      <%= f.hidden_field :user_id , value: qa.id%>
-                      <input type="hidden" name="user_id" value="<%= qa.id %>">
-                      <td><%= qa.name %></td>
-                      <td>
-                        <%= f.submit 'Add to Project' , class: "btn btn-primary"%>
-                      </td>
+                      <th>QAs</th>
+                      <th colspan="1">Action</th>
                     </tr>
-                  <% end %>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                    <% @qa.each do |qa| %>
+                      <tr>
+                        <%= f.hidden_field :user_id , value: qa.id%>
+                        <input type="hidden" name="user_id" value="<%= qa.id %>">
+                        <td><%= qa.name %></td>
+                        <td>
+                          <%= f.submit 'Add to Project' , class: "btn btn-primary"%>
+                        </td>
+                      </tr>
+                    <% end %>
+                    </tbody>
+                  </table>
+                <%else%>
+                  <h5>There are no QAs available at the moment.</h5> 
+                <%end%>   
                 <% end %>
         </div>
     </div>
