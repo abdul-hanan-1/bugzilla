@@ -14,6 +14,7 @@ gem 'image_processing', '~> 1.2'
 gem 'mini_magick'
 # for roles authorization
 gem 'pundit'
+gem 'pg'
 
 gem 'rails', '~> 6.1.4'
 gem 'rubocop', require: false
@@ -45,9 +46,6 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
-group :production do
-  gem 'pg', '~> 1.2', '>= 1.2.3' 
-end
 
 group :development do
   gem 'sqlite3', '~> 1.4'

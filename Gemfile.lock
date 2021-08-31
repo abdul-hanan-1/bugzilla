@@ -252,7 +252,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   listen (~> 3.3)
   mini_magick
-  pg (~> 1.2, >= 1.2.3)
+  pg
   puma (~> 5.0)
   pundit
   rack-mini-profiler (~> 2.0)
