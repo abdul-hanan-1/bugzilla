@@ -76,7 +76,6 @@ class ProjectsController < ApplicationController
     @developer = User.developers.not_yet_added(@project.id)
     @qa = User.qas.not_yet_added(@project.id)
     if params[:user_id].present?
-
       @project.project_users.create(user_id: params[:user_id])
       respond_to do |format|
         format.html { redirect_to projects_url, notice: 'User was successfully added to project.' }
@@ -87,8 +86,13 @@ class ProjectsController < ApplicationController
 
   def remove_user
     authorize Project
+    user = User.find(params[:user_id])
+    if user.bugs.count > 0
+      user.bugs.each do |bug|
+        bug.update(status: 'new')
+      end  
+    end
     projectu = @project.project_users.find_by(user_id: params[:user_id])
-    puts projectu
     projectu.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'User was successfully removed from Project.' }
