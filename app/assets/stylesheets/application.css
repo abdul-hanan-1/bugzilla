@@ -21,7 +21,7 @@ table {
     overflow-x: auto;
     white-space: nowrap;
 }
-table tbody {
+table thead tbody {
     display: table;
     width: 100%;
 }
