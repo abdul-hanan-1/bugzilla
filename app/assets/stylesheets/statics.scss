@@ -644,11 +644,6 @@ progress {
   .container-sm, .container {
     max-width: 540px;
   }
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-}
 }
 @media (min-width: 768px) {
   .container-md, .container-sm, .container {
@@ -897,11 +892,7 @@ progress {
 }
 
 @media (min-width: 576px) {
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
+
   .col-sm {
     flex: 1 0 0%;
   }
