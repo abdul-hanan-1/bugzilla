@@ -16,3 +16,8 @@
 body {
 background-color: #ffe0b3; 
 }
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
