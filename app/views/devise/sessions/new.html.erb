@@ -1,5 +1,6 @@
 <header class="masthead" style="padding-top: 3rem;">
     <div class="container px-4 px-lg-5 h-100">
+        <%= link_to 'Back', root_path, class: "btn btn-primary" %>   
         <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-8 align-self-end">
                 <h1 class="text-white font-weight-bold">Login</h1>
@@ -8,7 +9,7 @@
             <div class="container" style="padding-right: 25%; padding-left: 25%;">            
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="field">
-                  <%= f.label :email, class: "text-white font-weight-bold"%><br />
+                  <%= f.label :email, class: "text-white font-weight-bold",style: "text-align: left !important;"%><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "form-control"%>
                 </div>
 
