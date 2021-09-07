@@ -17,10 +17,7 @@
                   <%= f.label :email , class: "text-white font-weight-bold"%><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control"%>
                 </div>
-                <div class="field">
-                  <%= f.label :user_type , class: "text-white font-weight-bold"%><br />
-                 <%= f.select :user_type, options_for_select(["manager", "developer", "qa"]), {prompt: 'Select Role'} , class: "form-select"%>
-                </div>
+                
                 <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                   <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
                 <% end %>
@@ -56,4 +53,4 @@
       </div>
     </div>
 </header>
-<%= link_to "Back", :back, class: "btn btn-secondary btn-xl" %>
+
