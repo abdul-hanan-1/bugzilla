@@ -8,6 +8,7 @@
             </div> 
             <div class="container" style="padding-right: 25%; padding-left: 25%;">            
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              
                 <div class="field">
                   <%= f.label :email, class: "text-white font-weight-bold"%><br />
                   <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "form-control"%>

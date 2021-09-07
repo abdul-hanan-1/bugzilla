@@ -58,7 +58,10 @@ class BugsController < ApplicationController
 
   def mark_completed
     authorize Bug
-    redirect_to(request.referrer) if @bug.update(status: params[:status])
+    if @bug.update(status: params[:status])
+      flash.alert = "Your bug fix has been submitted to QA for review." 
+      redirect_to(request.referrer) 
+    end
   end
 
   # DELETE /bugs/1 or /bugs/1.json
