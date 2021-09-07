@@ -1,4 +1,4 @@
-BUGZILLA-An Efficient system for tracking bugs in your projects.
+BUGZILLA - An Efficient system for tracking bugs in your projects.
 
 Live demo: https://bugzillaa-app.herokuapp.com/
 
