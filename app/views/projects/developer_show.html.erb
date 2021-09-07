@@ -1,6 +1,7 @@
 <h1 class="text-white fw-light" style="text-align: center;">Bugs in <%= @project.title.capitalize %></h1>
 <br>
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="accordian_overflow" style="width:100%;">
+<div class="row row-cols-1 row-cols-md-3 g-4 ">
   <% if @new_bugs.count>0 %>
     <% @new_bugs.each do |bug| %>
       <div class="col">
@@ -27,6 +28,7 @@
     <br><br>
     <h3 class="text-white fw-light" style="margin-left: 30px;">Currently there are no bugs in <%= @project.title.capitalize %> </h3>  
   <%end%>
+</div>
 </div>
 <br>
 <%= link_to 'Back', projects_path ,class: "btn btn-primary" %>
