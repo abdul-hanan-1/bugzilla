@@ -15,11 +15,13 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1 or /projects/1.json
+  def show
+    @developers = @project.users.developers
+    @qas = @project.users.qas
+  end
+
   def qa_show
     authorize Project
-    @new_bugs = @project.bugs.new_bugs.with_attached_screenshot
-    @assigned_bugs = @project.bugs.assigned.with_attached_screenshot
-    @completed_bugs = @project.bugs.completed.with_attached_screenshot
   end
 
   def developer_show
@@ -92,8 +94,8 @@ class ProjectsController < ApplicationController
         bug.update(status: 'new')
       end  
     end
-    projectu = @project.project_users.find_by(user_id: params[:user_id])
-    projectu.destroy
+    user_projects = @project.project_users.find_by(user_id: params[:user_id])
+    user_projects.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'User was successfully removed from Project.' }
       format.json { head :no_content }

@@ -9,45 +9,51 @@
             <p class= "text-white font-weight-bold"><%= @project.manager%></p>
             <%= form_with(url: "/projects/#{@project.id}/remove_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
             <strong class= "text-white font-weight-bold">Developers</strong>
-            <table class="table table-striped table-hover table-bordered" style="background-color: white">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="1"></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% @project.users.developers.each do |developer| %>
+            <% if @developers.count>0 %>
+              <table class="table table-striped table-hover table-bordered" style="background-color: white">
+                <thead>
                   <tr>
-                    <td><%= developer.name.capitalize %></td>
-                    <%= f.hidden_field :user_id, value: developer.id %>
-                    <td> <%= f.submit 'Remove', class: "btn btn-danger"%></td>
+                    <th>Name</th>
+                    <th colspan="1"></th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <% @developers.each do |developer| %>
+                    <tr>
+                      <td><%= developer.name.capitalize %></td>
+                      <%= f.hidden_field :user_id, value: developer.id %>
+                      <td> <%= f.submit 'Remove', class: "btn btn-danger"%></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <%else%>
+              <h5 class="text-white font-weight-bold">There are no developers in this project.</h5> 
+            <%end%>
             <% end %>
             <strong class= "text-white font-weight-bold">QAs</strong>
             <%= form_with(url: "/projects/#{@project.id}/remove_user", method: "post", html: {style: 'text-align: center'}) do |f|%>
-            <table class="table table-striped table-hover table-bordered" style="background-color: white">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th colspan="1"></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% @project.users.qas.each do |qa| %>
+            <% if @qas.count>0 %>
+              <table class="table table-striped table-hover table-bordered" style="background-color: white">
+                <thead>
                   <tr>
-                    <td><%= qa.name.capitalize %></td>
-                    <%= f.hidden_field :user_id, value: qa.id %>
-                    <td> <%= f.submit 'Remove', class: "btn btn-danger"%></td>        
+                    <th>Name</th>
+                    <th colspan="1"></th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <% @qas.each do |qa| %>
+                    <tr>
+                      <td><%= qa.name.capitalize %></td>
+                      <%= f.hidden_field :user_id, value: qa.id %>
+                      <td> <%= f.submit 'Remove', class: "btn btn-danger"%></td>        
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            <%else%>
+              <h5 class="text-white font-weight-bold">There are no QAs in this project.</h5> 
+            <%end%>
             <% end %>
        </div>
     </div>

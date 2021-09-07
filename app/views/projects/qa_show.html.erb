@@ -9,9 +9,9 @@
     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
       <div class="accordion-body">
         <div class="container justify-content-center">
-          <% if @new_bugs.count > 0 %>
+          <% if new_bugs(@project).count > 0 %>
             <div class="row row-cols-1 row-cols-md-3 g-4">
-              <% @new_bugs.each do |bug| %>
+              <% new_bugs(@project).each do |bug| %>
                 <div class="col">
                   <div class="card" style="width: 18rem;">
                     <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
