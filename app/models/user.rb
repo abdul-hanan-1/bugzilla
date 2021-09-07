@@ -14,7 +14,7 @@ class User < ApplicationRecord
   ROLES = {manager: 'manager', developer: 'developer', qa: 'qa'}
 
   scope :developers, -> { where(user_type: ROLES[:developer]) }
-  scope :qas, -> { where(user_type: ROLES[:developer]) }
+  scope :qas, -> { where(user_type: ROLES[:qa]) }
   scope :not_yet_added, ->(id) { select { |u| !u.projects.pluck(:id).include?(id) } }
 
   def manager?
