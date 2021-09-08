@@ -22,4 +22,6 @@ test:
 
 production:
   <<: *default
-  database: bugzilla_db
+  username: idxkqfavzarsjy
+  password: ebb5d91c58350fd2423f210567000c096aefbc0ee3ccec66ee04fb1efcb99b1f
+  database: d438140g137vbk
