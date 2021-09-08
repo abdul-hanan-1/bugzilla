@@ -15,7 +15,7 @@ gem 'mini_magick'
 # for roles authorization
 gem 'pundit'
 gem 'pg'
-
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'rails', '~> 6.1.4'
 gem 'rubocop', require: false
 # Use sqlite3 as the database for Active Record

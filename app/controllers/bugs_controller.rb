@@ -10,7 +10,12 @@ class BugsController < ApplicationController
   end
 
   # GET /bugs/1 or /bugs/1.json
-  def show; end
+  def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   # GET /bugs/new
   def new

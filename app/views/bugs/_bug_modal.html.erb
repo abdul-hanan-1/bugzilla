@@ -1,0 +1,54 @@
+<div class="modal fade" id="bug-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><%= @bug.title %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="col">
+          <div class="card">
+            <%= image_tag url_for(@bug.screenshot) , class: "card-img-top"  if @bug.screenshot.attached? %>
+            <hr>
+            <div class="card-body" style="background-color: #bdaaa5">
+              <h5 class="card-title">Type</h5>
+              <p class="card-text"><%= @bug.kind %></p>
+              <h5 class="card-title">Deadline</h5>
+              <p class="card-text"><%= @bug.deadline %></p>
+              <h5 class="card-title">Status</h5>
+              <p class="card-text"><%= @bug.status.humanize %></p>
+              <% if current_user.developer? && !@bug.users.pluck(:id).include?(current_user.id) %>
+                <hr>
+                <%= form_with url: "/bugs/#{bug.id}/assign_bug", method: :patch do |f| %>
+                  <%= f.hidden_field :status, value: 'assigned' %>
+                  <%= f.submit 'Assign to yourself' ,class: "btn btn-primary"%>
+                <% end%>
+              <% end %>
+              <% if current_user.developer? && current_user.bugs.assigned.pluck(:id).include?(bug.id) %>
+                <hr>
+                <%= form_with url: "/bugs/#{bug.id}/mark_completed", method: :patch do |f| %>
+                  <%= f.hidden_field :status, value: 'completed' %>
+                  <%= f.submit 'Mark Completed' ,class: "btn btn-success"%>
+                <% end%>
+              <% end%>
+              <hr>
+              <h5 class="card-title">Members: </h5>
+              <ul>
+                <% if bug.users.count > 0 %>
+                  <% @bug.users.each do |member| %>
+                    <li><%= member.name.humanize %></li>
+                  <% end %>
+                <% else %>
+                  <li>No members.</li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
