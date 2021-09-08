@@ -12,19 +12,23 @@ Actors:
    3) Developer - The developer can assign himself bugs from the list of projects assigned to him and can mark his assigned bugs resolved.
 
 Test users credentials:
+------------------------
 
 Dev: 
 ----
    email: andy@gmail.com
+   
    password: password
 
 Manager: 
 --------
    email: michael@gmail.com
+   
    password: password
 
 QA:
 ----
    email: creed@gmail.com
+   
    password: password
    
