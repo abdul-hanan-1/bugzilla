@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show qa_show developer_show edit update destroy add_user remove_user add_bug]
+  before_action :set_project, only: %i[show qa_show developer_show edit update
+                                       bugs destroy add_user remove_user add_bug]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -20,14 +21,14 @@ class ProjectsController < ApplicationController
     @qas = @project.users.qas
   end
 
-  def qa_show
-    authorize Project
-  end
-
-  def developer_show
-    authorize Project
-    @new_bugs = @project.bugs.new_bugs.with_attached_screenshot
-  end
+  # def qa_show
+  #   authorize Project
+  # end
+  #
+  # def developer_show
+  #   authorize Project
+  #   @project
+  # end
 
   # GET /projects/new
   def new
@@ -112,13 +113,17 @@ class ProjectsController < ApplicationController
     @bug = @project.bugs.new(bug_params)
     respond_to do |format|
       if @bug.save
-        format.html { redirect_to qa_show_url(@project.id), notice: 'Bug was successfully added.' }
+        format.html { redirect_to project_bugs_path(@project.id), notice: 'Bug was successfully added.' }
         format.json { head :no_content }
       else
         format.html { render :add_bug, status: :unprocessable_entity }
         format.json { render json: @bug.errors, status: :unprocessable_entity }  
       end  
     end
+  end
+
+  def bugs
+    @bugs = @project.bugs
   end
 
   private

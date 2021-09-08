@@ -1,23 +1,23 @@
+<div class="container justify-content-center">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <%= image_tag url_for(@bug.screenshot) , class: "card-img-top"  if @bug.screenshot.attached? %>
+        <div class="card-body" style="background-color: #bdaaa5">
+          <h5 class="card-title">Title</h5>
+          <p class="card-text"><%= @bug.title %></p>
+          <h5 class="card-title">Type</h5>
+          <p class="card-text"><%= @bug.kind %></p>
+          <h5 class="card-title">Deadline</h5>
+          <p class="card-text"><%= @bug.deadline %></p>
+          <h5 class="card-title">Status</h5>
+          <p class="card-text"><%= @bug.status %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @bug.title %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= @bug.deadline %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @bug.status %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @bug.kind %>
-</p>
 
 <%= link_to 'Edit', edit_bug_path(@bug) %> |
 <%= link_to 'Back', bugs_path %>

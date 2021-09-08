@@ -7,6 +7,8 @@
         <div class="card" style="width: 18rem;">
           <%= image_tag url_for(bug.screenshot) , class: "card-img-top"  if bug.screenshot.attached? %>
           <div class="card-body" style="background-color: #bdaaa5">
+            <h5 class="card-title">Project:</h5>
+            <p class="card-text"><%= bug.project.title %></p>
             <h5 class="card-title">Title</h5>
             <p class="card-text"><%= bug.title %></p>
             <h5 class="card-title">Type</h5>

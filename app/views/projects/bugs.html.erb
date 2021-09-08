@@ -1,0 +1,63 @@
+<h1 class="font-weight-bold fw-light" style="text-align: center;">Bugs in <%= @project.title.capitalize%></h1>
+<hr>
+<!-- Lists container -->
+<section class="lists-container">
+  <div class="list">
+    <div style="display: inline-flex">
+      <h3 class="list-title">Unassigned Bugs </h3>
+      <div class=" numberCircle" style="color: #f66332; margin-left: 20%"><%= new_bugs(@project).count %></div>
+    </div>
+    <ul class="list-items">
+      <% if new_bugs(@project).count > 0 %>
+        <% new_bugs(@project).each do |bug| %>
+        <li>
+          <%= link_to bug.title, bug_path(bug), remote: true %>
+        </li>
+        <% end %>
+      <% else %>
+        <li>There are no new bugs.</li>
+      <%end%>
+    </ul>
+    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn" if current_user.qa? %>
+  </div>
+  <div class="list">
+    <div style="display: inline-flex">
+      <h3 class="list-title">Assigned Bugs</h3>
+      <div class=" numberCircle" style="color: #f66332; margin-left: 20%"><%= assigned_bugs(@project).count %></div>
+    </div>
+    <ul class="list-items">
+      <% if assigned_bugs(@project).count > 0 %>
+        <% assigned_bugs(@project).each do |bug| %>
+          <li>
+            <%= link_to bug.title, bug_path(bug), remote: true %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>There are no new bugs.</li>
+      <%end%>
+    </ul>
+    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn" if current_user.qa? %>
+  </div>
+  <div class="list">
+
+    <div style="display: inline-flex">
+      <h3 class="list-title">Resolved</h3>
+      <div class=" numberCircle" style="color: #f66332; margin-left: 20%"><%= completed_bugs(@project).count %></div>
+    </div>
+    <ul class="list-items">
+      <% if completed_bugs(@project).count > 0 %>
+        <% completed_bugs(@project).each do |bug| %>
+          <li>
+            <%= link_to bug.title, bug_path(bug), remote: true %>
+          </li>
+        <% end %>
+      <% else %>
+        <li>There are no new bugs.</li>
+      <%end%>
+    </ul>
+    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn" if current_user.qa? %>
+  </div>
+</section>
+<!-- End of lists container -->
+
+<div id='bug-content'></div>
