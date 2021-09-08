@@ -1,7 +1,10 @@
 BUGZILLA - An Efficient system for tracking bugs in your projects.
+------------------------------------------------------------------
+
 Live demo: https://bugzillaa-app.herokuapp.com/
 
 Actors: 
+-------
    There are 3 actors in this app:
    
    1) Manager - The manager can create, create and destroy a project and can assign or remove developers and QAs from the project.
@@ -11,14 +14,17 @@ Actors:
 Test users credentials:
 
 Dev: 
+----
    email: andy@gmail.com
    password: password
 
 Manager: 
+--------
    email: michael@gmail.com
    password: password
 
-QA: 
+QA:
+----
    email: creed@gmail.com
    password: password
    
