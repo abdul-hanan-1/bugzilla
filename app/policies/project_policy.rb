@@ -12,6 +12,10 @@ class ProjectPolicy
     user.manager?
   end
 
+  def update_user?
+    user.manager?
+  end
+
   def show?
     user.manager?
   end

@@ -2,7 +2,7 @@
 
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show qa_show developer_show edit update
-                                       bugs destroy add_user remove_user add_bug]
+                                       bugs destroy add_user remove_user add_bug update_user]
   before_action :authenticate_user!
 
   # GET /projects or /projects.json
@@ -20,15 +20,6 @@ class ProjectsController < ApplicationController
     @developers = @project.users.developers
     @qas = @project.users.qas
   end
-
-  # def qa_show
-  #   authorize Project
-  # end
-  #
-  # def developer_show
-  #   authorize Project
-  #   @project
-  # end
 
   # GET /projects/new
   def new
@@ -74,29 +65,40 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def add_user
+  def update_user
     authorize Project
     @developer = User.developers.not_yet_added(@project.id)
     @qa = User.qas.not_yet_added(@project.id)
-    if params[:user_id].present?
-      @project.project_users.create(user_id: params[:user_id])
+    params[:user_ids].each do |user_id|
+      @project.project_users.create(user_id: user_id)
+    end
       respond_to do |format|
         format.html { redirect_to projects_url, notice: 'User was successfully added to project.' }
         format.json { head :no_content }
       end
-    end
+  end
+
+  def add_user
+    authorize Project
+    @developer = User.developers.not_yet_added(@project.id)
+    @qa = User.qas.not_yet_added(@project.id)
+
   end
 
   def remove_user
     authorize Project
-    user = User.find(params[:user_id])
-    if user.bugs.count > 0
-      user.bugs.each do |bug|
-        bug.update(status: 'new')
-      end  
+    params[:user_ids].each do |user_id|
+      if user_id != ""
+        user = User.find(user_id)
+        if user.bugs.count > 0
+          user.bugs.each do |bug|
+            bug.update(status: 'new')
+          end
+        end
+        user_projects = @project.project_users.find_by(user_id: user_id)
+        user_projects.destroy
+      end
     end
-    user_projects = @project.project_users.find_by(user_id: params[:user_id])
-    user_projects.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'User was successfully removed from Project.' }
       format.json { head :no_content }
