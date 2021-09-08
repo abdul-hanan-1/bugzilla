@@ -16,7 +16,7 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><%= project.title %></td>
+        <td><%= link_to project.title, project_bugs_path(project) %></td>
         <% unless current_user.manager? %>
           <td><%= project.manager %></td>
         <%  end %>

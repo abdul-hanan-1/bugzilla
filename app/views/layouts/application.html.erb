@@ -14,9 +14,16 @@
   <body>
       <%=render 'layouts/header'%>
       <% unless notice.nil? %>
-        <div class="alert alert-success" >
+        <div class="alert alert-success" style="padding: 0px; margin-top: 0px;" >
           <%= notice %>
         </div>
+      <% end %>
+      <%if notice.nil? %>
+        <%- flash.each do |name, msg| -%>
+          <div class="alert alert-danger" style="padding: 0px; margin-top: 0px;" >
+            <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+          </div>
+        <% end %>
       <% end %>
       <div class="container" style="padding: 20px" >
         <br>

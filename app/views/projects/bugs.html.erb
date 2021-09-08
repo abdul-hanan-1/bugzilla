@@ -18,7 +18,7 @@
         <li>There are no new bugs.</li>
       <%end%>
     </ul>
-    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn" if current_user.qa? %>
+    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn btn-primary" if current_user.qa? %>
   </div>
   <div class="list">
     <div style="display: inline-flex">
@@ -36,7 +36,7 @@
         <li>There are no new bugs.</li>
       <%end%>
     </ul>
-    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn" if current_user.qa? %>
+    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn btn-primary" if current_user.qa? %>
   </div>
   <div class="list">
 
@@ -55,7 +55,7 @@
         <li>There are no new bugs.</li>
       <%end%>
     </ul>
-    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn" if current_user.qa? %>
+    <%= link_to 'Add Bug', add_bug_path(@project.id) ,class: "add-card-btn btn btn-primary" if current_user.qa? %>
   </div>
 </section>
 <!-- End of lists container -->
