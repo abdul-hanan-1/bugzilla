@@ -10,9 +10,9 @@ require 'faker'
 
 manager1 = User.create(name: "michael", email: "michael@gmail.com", password:"password", password_confirmation: "password",user_type: "manager")
 
-manager2 = User.create(name: "schrute", email: "schrute@gamil.com", password:"password", password_confirmation: "password",user_type: "manager")
+manager2 = User.create(name: "schrute", email: "schrute@gmail.com", password:"password", password_confirmation: "password",user_type: "manager")
 
-manager3 = User.create(name: "dwight", email: "dwight@gamil.com", password:"password", password_confirmation: "password",user_type: "manager")
+manager3 = User.create(name: "dwight", email: "dwight@gmail.com", password:"password", password_confirmation: "password",user_type: "manager")
 
 5.times do
   manager1.projects.create(manager: manager1.name, title: Faker::Name.name)
