@@ -29,6 +29,14 @@
             <br>
 
             <div class="field">
+              <%= form.label :description , class: "text-white font-weight-bold" %>
+              <br>
+              <%= form.text_area :description, class: "form-control sm" %>
+            </div>
+
+            <br>
+
+            <div class="field">
               <%= form.label :screenshot , class: "text-white font-weight-bold"%>
               <br>
               <%= form.file_field :screenshot , class: "text-white font-weight-bold"%>
@@ -39,7 +47,7 @@
             <div class="field">
               <%= form.label :deadline , class: "text-white font-weight-bold"%>
               <br>
-              <%= form.datetime_select :deadline%>
+              <%= form.datetime_local_field :deadline, class: "form-control"%>
             </div>
 
             <br>

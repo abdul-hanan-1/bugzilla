@@ -10,7 +10,9 @@
           <div class="card">
             <%= image_tag url_for(@bug.screenshot) , class: "card-img-top"  if @bug.screenshot.attached? %>
             <hr>
-            <div class="card-body" style="background-color: #bdaaa5">
+            <div class="card-body" style="background-color: #ffe0b3">
+              <h5 class="card-title">Description</h5>
+              <p class="card-text"><%= @bug.description %></p>
               <h5 class="card-title">Type</h5>
               <p class="card-text"><%= @bug.kind %></p>
               <h5 class="card-title">Deadline</h5>
